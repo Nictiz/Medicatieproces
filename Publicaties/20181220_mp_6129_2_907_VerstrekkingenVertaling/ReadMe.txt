@@ -14,6 +14,8 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
 Introduction
 ===================================================================================================================================
 
+The principles and functional explanation / documentation can be found via: https://informatiestandaarden.nictiz.nl/wiki/Mappingarchitectuur
+
 This publication has some conversion xslt's which convert a MP 6.12 'medicatieverstrekkingenlijst' to a generic 'ADA'-format for the 9.0.7 transaction beschikbaarstellen_verstrekkingenvertaling (hl7_2_ada\mp\6.12.9\opleveren_verstrekkingenlijst).
 This publication also has some conversion xslt's which convert this generic 'ADA'-format to MP FHIR Resources (ada_2_fhir\mp\9.0.7\beschikbaarstellen_verstrekkingenvertaling).
 
