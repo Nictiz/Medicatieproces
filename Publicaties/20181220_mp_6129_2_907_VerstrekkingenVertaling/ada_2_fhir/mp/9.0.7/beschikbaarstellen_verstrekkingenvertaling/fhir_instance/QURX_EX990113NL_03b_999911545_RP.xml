@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://hl7.org/fhir/STU3/bundle.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <Bundle xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/bundle.xsd">
     <type value="searchset"/>
     <total value="7"/>
     <entry>
-        <fullUrl value="urn:uuid:5a40e062-39d1-11e9-1364-020000000000"/>
+        <fullUrl value="urn:uuid:fbbc14bc-cb20-11e9-5181-020000000000"/>
         <resource>
             <Patient>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Patient"/>
                 </meta>
+                <identifier>
+                    <system value="http://fhir.nl/fhir/NamingSystem/bsn"/>
+                    <value>
+                        <extension url="http://hl7.org/fhir/StructureDefinition/data-absent-reason">
+                            <valueCode value="masked"/>
+                        </extension>
+                    </value>
+                </identifier>
                 <name>
                     <extension url="http://hl7.org/fhir/StructureDefinition/humanname-assembly-order">
                         <valueCode value="NL1"/>
@@ -43,7 +50,7 @@
         <resource>
             <Organization>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Organization"/>
                 </meta>
                 <identifier>
                     <system value="http://fhir.nl/fhir/NamingSystem/ura"/>
@@ -57,13 +64,14 @@
         <resource>
             <Medication>
                 <meta>
-                    <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Product"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Product"/>
                 </meta>
                 <code>
                     <coding>
                         <system value="urn:oid:2.16.840.1.113883.2.4.4.8"/>
                         <code value="15132714"/>
                         <display value="NUTRIDRINK AARDBEI"/>
+                        <userSelected value="true"/>
                     </coding>
                     <coding>
                         <system value="urn:oid:2.16.840.1.113883.2.4.4.7"/>
@@ -74,7 +82,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5a40e28c-39d1-11e9-1364-020000000000"/>
+        <fullUrl value="urn:uuid:fbbc1740-cb20-11e9-5181-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -110,7 +118,7 @@
                     <display value="NUTRIDRINK AARDBEI"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5a40e062-39d1-11e9-1364-020000000000"/>
+                    <reference value="urn:uuid:fbbc14bc-cb20-11e9-5181-020000000000"/>
                     <display value="B. B. van der Sluis"/>
                 </subject>
                 <performer>
@@ -139,7 +147,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5a40e2bd-39d1-11e9-1364-020000000000"/>
+        <fullUrl value="urn:uuid:fbbc1771-cb20-11e9-5181-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -175,7 +183,7 @@
                     <display value="NUTRIDRINK AARDBEI"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5a40e062-39d1-11e9-1364-020000000000"/>
+                    <reference value="urn:uuid:fbbc14bc-cb20-11e9-5181-020000000000"/>
                     <display value="B. B. van der Sluis"/>
                 </subject>
                 <performer>
@@ -204,7 +212,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5a40e2ab-39d1-11e9-1364-020000000000"/>
+        <fullUrl value="urn:uuid:84bd06a0-5d8a-11e7-9598-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -236,7 +244,7 @@
                     <display value="NUTRIDRINK AARDBEI"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5a40e062-39d1-11e9-1364-020000000000"/>
+                    <reference value="urn:uuid:fbbc14bc-cb20-11e9-5181-020000000000"/>
                     <display value="B. B. van der Sluis"/>
                 </subject>
                 <performer>
@@ -266,7 +274,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5a40f7f4-39d1-11e9-1364-020000000000"/>
+        <fullUrl value="urn:uuid:92955660-5d8a-11e7-9598-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -298,7 +306,7 @@
                     <display value="NUTRIDRINK AARDBEI"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5a40e062-39d1-11e9-1364-020000000000"/>
+                    <reference value="urn:uuid:fbbc14bc-cb20-11e9-5181-020000000000"/>
                     <display value="B. B. van der Sluis"/>
                 </subject>
                 <performer>

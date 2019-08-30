@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://hl7.org/fhir/STU3/bundle.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <Bundle xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/bundle.xsd">
     <type value="searchset"/>
     <total value="5"/>
     <entry>
-        <fullUrl value="urn:uuid:5b01bf62-39d1-11e9-1375-020000000000"/>
+        <fullUrl value="urn:uuid:fd48811c-cb20-11e9-2073-020000000000"/>
         <resource>
             <Patient>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Patient"/>
                 </meta>
+                <identifier>
+                    <system value="http://fhir.nl/fhir/NamingSystem/bsn"/>
+                    <value>
+                        <extension url="http://hl7.org/fhir/StructureDefinition/data-absent-reason">
+                            <valueCode value="masked"/>
+                        </extension>
+                    </value>
+                </identifier>
                 <name>
                     <extension url="http://hl7.org/fhir/StructureDefinition/humanname-assembly-order">
                         <valueCode value="NL1"/>
@@ -40,7 +47,7 @@
         <resource>
             <Organization>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Organization"/>
                 </meta>
                 <identifier>
                     <system value="http://fhir.nl/fhir/NamingSystem/ura"/>
@@ -54,13 +61,14 @@
         <resource>
             <Medication>
                 <meta>
-                    <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Product"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Product"/>
                 </meta>
                 <code>
                     <coding>
                         <system value="urn:oid:2.16.840.1.113883.2.4.4.8"/>
                         <code value="14243091"/>
                         <display value="OXAZEPAM GF TABLET 10MG"/>
+                        <userSelected value="true"/>
                     </coding>
                     <coding>
                         <system value="urn:oid:2.16.840.1.113883.2.4.4.7"/>
@@ -75,7 +83,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5b01c18b-39d1-11e9-1375-020000000000"/>
+        <fullUrl value="urn:uuid:fd48839f-cb20-11e9-2073-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -111,7 +119,7 @@
                     <display value="OXAZEPAM GF TABLET 10MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5b01bf62-39d1-11e9-1375-020000000000"/>
+                    <reference value="urn:uuid:fd48811c-cb20-11e9-2073-020000000000"/>
                     <display value="Aaltje A. Adelaar"/>
                 </subject>
                 <performer>
@@ -140,7 +148,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:5b01c1ab-39d1-11e9-1375-020000000000"/>
+        <fullUrl value="urn:uuid:5ada2a80-100b-11e5-b939-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -172,7 +180,7 @@
                     <display value="OXAZEPAM GF TABLET 10MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:5b01bf62-39d1-11e9-1375-020000000000"/>
+                    <reference value="urn:uuid:fd48811c-cb20-11e9-2073-020000000000"/>
                     <display value="Aaltje A. Adelaar"/>
                 </subject>
                 <performer>

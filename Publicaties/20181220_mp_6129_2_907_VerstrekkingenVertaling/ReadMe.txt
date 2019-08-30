@@ -37,7 +37,7 @@ hl7_2_ada\mp\6.12.9\opleveren_verstrekkingenlijst
 ===================================================================================================================================
 This is a preliminary version of converting Beschikbaarstellen verstrekkingenlijst 6.12 payload to a relatively simple dataset xml format (based on functional definition of a MP 9 beschikbaarstellen medicatiegegevens transaction). It is based on the publication https://decor.nictiz.nl/medicatieproces/mp-html-20181220T121121/project.html.
 
-The folder "payload" contains the stylesheet that does the conversion for the payload: "opleveren_verstrekkingenlijst_612_to_ada_vv.xsl"
+In the folder hl7_2_ada\mp\6.12.9\opleveren_verstrekkingenlijst there is a folder "payload", which contains the stylesheet that does the conversion for the payload: "opleveren_verstrekkingenlijst_612_to_ada_vv.xsl"
 This xslt uses the "../../../hl7_2_ada_mp_include.xsl" which is meant to be reused by other/different transactions and/or standard versions (such as 'sturen voorschrift' or 'medicatieoverzicht' or MP-9 CDA or MP-9 FHIR formats).
 The hl7_2_ada_mp_include.xsl uses in its turn the ../hl7/hl7_2_ada_hl7_include.xsl which contains some hl7-specific stuff that can be reused over different domains (such as Geboortezorg and Ketenzorg).
 The hl7_2_ada_hl7_include.xsl uses in its turn the ../../util/constants.xsl and ../../util/uuid.xsl which contains some generic stuff that can be reused over different types of conversions (ada_2_hl7, ada_2_fhir, hl7_2_ada, et cetera) and domains (such as Geboortezorg and Ketenzorg).
@@ -50,7 +50,7 @@ ada_2_fhir\mp\9.0.7\beschikbaarstellen_verstrekkingenvertaling
 
 This is a preliminary version of converting Beschikbaarstellen verstrekkingenvertaling ada format to a FHIR Bundle. It is based on the publication https://decor.nictiz.nl/medicatieproces/mp-html-20181220T121121/project.html and the MedMij publication https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2018.06_Ontwerpen, use case Medicatiegegevens - Verstrekkingenvertaling.
 
-The folder "payload" contains the stylesheet that does the conversion for the payload: "beschikbaarstellen_verstrekkingenvertaling_2_fhir.xsl"
+In the folder ada_2_fhir\mp\9.0.7\beschikbaarstellen_verstrekkingenvertaling there is a folder "payload", which contains the stylesheet that does the conversion for the payload: "beschikbaarstellen_verstrekkingenvertaling_2_fhir.xsl"
 This xslt uses the "../../../2_fhir_mp_include.xsl" which is meant to be reused by other/different transactions and/or standard versions (such as 'sturen voorschrift' or 'medicatieoverzicht' or MP-9 FHIR formats).
 The 2_fhir_mp_include.xsl uses in its turn the ../fhir/2_fhir_fhir_include.xsl which contains some fhir-specific stuff that can be reused over different domains (such as Geboortezorg and Ketenzorg).
 The 2_fhir_mp_include.xsl uses in its turn the ../../util/constants.xsl, ../../util/datetime.xsl, ../../util/uuid.xsl  which contains some generic stuff that can be reused over different types of conversions (ada_2_hl7, ada_2_fhir, hl7_2_ada, et cetera) and domains (such as Geboortezorg and Ketenzorg).

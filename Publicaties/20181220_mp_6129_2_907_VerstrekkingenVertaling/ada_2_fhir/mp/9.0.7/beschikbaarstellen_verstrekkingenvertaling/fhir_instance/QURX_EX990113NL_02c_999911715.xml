@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://hl7.org/fhir/STU3/bundle.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <Bundle xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/bundle.xsd">
     <type value="searchset"/>
     <total value="10"/>
     <entry>
-        <fullUrl value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
         <resource>
             <Patient>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Patient"/>
                 </meta>
+                <identifier>
+                    <system value="http://fhir.nl/fhir/NamingSystem/bsn"/>
+                    <value>
+                        <extension url="http://hl7.org/fhir/StructureDefinition/data-absent-reason">
+                            <valueCode value="masked"/>
+                        </extension>
+                    </value>
+                </identifier>
                 <name>
                     <extension url="http://hl7.org/fhir/StructureDefinition/humanname-assembly-order">
                         <valueCode value="NL1"/>
@@ -35,7 +42,7 @@
         <resource>
             <Organization>
                 <meta>
-                    <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Organization"/>
                 </meta>
                 <identifier>
                     <system value="http://fhir.nl/fhir/NamingSystem/ura"/>
@@ -49,29 +56,34 @@
         <resource>
             <Medication>
                 <meta>
-                    <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Product"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Product"/>
                 </meta>
                 <code>
                     <coding>
                         <system value="urn:oid:2.16.840.1.113883.2.4.4.8"/>
                         <code value="15401367"/>
                         <display value="PARACETAMOL PCH TABLET 500MG"/>
+                        <userSelected value="true"/>
                     </coding>
                 </code>
             </Medication>
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a7948-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:fa1202b0-cb20-11e9-1461-020000000000"/>
         <resource>
             <Medication>
                 <meta>
-                    <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Product"/>
+                    <profile value="http://nictiz.nl/fhir/StructureDefinition/mp612-DispenseToFHIRConversion-Product"/>
                 </meta>
                 <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Product-Description">
                     <valueString value="Titel: Ureum 10% in eucerine cum aqua&#xA;                                        Regel: Ureum 10 gr &#xA;                                        Regel: Eucerine met water creme FNA ad 100g."/>
                 </extension>
                 <code>
+                    <extension url="http://hl7.org/fhir/StructureDefinition/iso21090-nullFlavor">
+                        <valueCode value="OTH"/>
+                    </extension>
+                    <text value="Ureum 10% in eucerine cum aqua"/>
                     <text value="Ureum 10% in eucerine cum aqua"/>
                 </code>
                 <ingredient>
@@ -82,7 +94,6 @@
                             <display value="UREUM"/>
                         </coding>
                     </itemCodeableConcept>
-                    <isActive value="true"/>
                     <amount>
                         <numerator>
                             <value value="10"/>
@@ -106,7 +117,6 @@
                             <display value="EUCERINE MET WATER FAGRON"/>
                         </coding>
                     </itemCodeableConcept>
-                    <isActive value="true"/>
                     <amount>
                         <numerator>
                             <extension url="http://hl7.org/fhir/StructureDefinition/iso21090-nullFlavor">
@@ -125,7 +135,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a63ca-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:fa11e9ae-cb20-11e9-1461-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -153,7 +163,7 @@
                     <display value="PARACETAMOL PCH TABLET 500MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>
@@ -190,7 +200,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a63f9-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:fa11e9dd-cb20-11e9-1461-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -226,7 +236,7 @@
                     <display value="PARACETAMOL PCH TABLET 500MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>
@@ -255,7 +265,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a793f-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:fa1202a7-cb20-11e9-1461-020000000000"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -279,11 +289,11 @@
                     <text value="Toedieningsafspraak"/>
                 </category>
                 <medicationReference>
-                    <reference value="urn:uuid:598a7948-39d1-11e9-1746-020000000000"/>
-                    <display value="overig"/>
+                    <reference value="urn:uuid:fa1202b0-cb20-11e9-1461-020000000000"/>
+                    <display value="Ureum 10% in eucerine cum aqua"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>
@@ -306,7 +316,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a63e9-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:14606290-2dbd-11e8-b566-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -338,7 +348,7 @@
                     <display value="PARACETAMOL PCH TABLET 500MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>
@@ -362,7 +372,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a6417-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:13438b70-2dbe-11e8-b566-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -394,7 +404,7 @@
                     <display value="PARACETAMOL PCH TABLET 500MG"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>
@@ -418,7 +428,7 @@
         </resource>
     </entry>
     <entry>
-        <fullUrl value="urn:uuid:598a796e-39d1-11e9-1746-020000000000"/>
+        <fullUrl value="urn:uuid:a083ca80-5772-11e8-b566-0800200c9a66"/>
         <resource>
             <MedicationDispense>
                 <meta>
@@ -446,11 +456,11 @@
                     <text value="Medicatieverstrekking"/>
                 </category>
                 <medicationReference>
-                    <reference value="urn:uuid:598a7948-39d1-11e9-1746-020000000000"/>
-                    <display value="overig"/>
+                    <reference value="urn:uuid:fa1202b0-cb20-11e9-1461-020000000000"/>
+                    <display value="Ureum 10% in eucerine cum aqua"/>
                 </medicationReference>
                 <subject>
-                    <reference value="urn:uuid:598a61a2-39d1-11e9-1746-020000000000"/>
+                    <reference value="urn:uuid:fa11e72c-cb20-11e9-1461-020000000000"/>
                     <display value="Hanneke XXX_Bekker"/>
                 </subject>
                 <performer>

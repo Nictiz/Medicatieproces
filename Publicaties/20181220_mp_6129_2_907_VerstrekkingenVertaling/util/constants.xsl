@@ -33,12 +33,20 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     <xsl:variable name="ada-unit-cm" select="('centimeter', 'cm')"/>
     <xsl:variable name="ada-unit-m" select="('meter', 'm')"/>
 
+    <xsl:variable name="ada-unit-liter" select="('liter', 'l')"/>
+    <xsl:variable name="ada-unit-dl" select="('deciliter', 'dl')"/>
+    <xsl:variable name="ada-unit-cl" select="('centiliter', 'cl')"/>
+    <xsl:variable name="ada-unit-ml" select="('milliliter', 'ml')"/>
+    <xsl:variable name="ada-unit-ul" select="('microliter', 'ul')"/>
+
     <xsl:variable name="oidAGB">2.16.840.1.113883.2.4.6.1</xsl:variable>
     <xsl:variable name="oidAGBSpecialismen">2.16.840.1.113883.2.4.6.7</xsl:variable>
     <xsl:variable name="oidAORTAApplicatieID">2.16.840.1.113883.2.4.6.6</xsl:variable>
     <xsl:variable name="oidAORTAProfileID">2.16.840.1.113883.2.4.3.11.1</xsl:variable>
     <xsl:variable name="oidBIGregister">2.16.528.1.1007.5.1</xsl:variable>
     <xsl:variable name="oidBurgerservicenummer">2.16.840.1.113883.2.4.6.3</xsl:variable>
+    <xsl:variable name="oidChoiceListOrientation">2.16.840.1.113883.4.642.1.851</xsl:variable>
+    <xsl:variable name="oidFHIRObservationCategory">2.16.840.1.113883.4.642.1.393</xsl:variable>
     <xsl:variable name="oidGStandaardGPK">2.16.840.1.113883.2.4.4.1</xsl:variable>
     <xsl:variable name="oidGStandaardPRK">2.16.840.1.113883.2.4.4.10</xsl:variable>
     <xsl:variable name="oidGStandaardHPK">2.16.840.1.113883.2.4.4.7</xsl:variable>
@@ -52,6 +60,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     <xsl:variable name="oidGStandaardTH040ContraIndicaties">2.16.840.1.113883.2.4.4.1.902.40</xsl:variable>
     <xsl:variable name="oidHL7AcknowledgementDetailCode">2.16.840.1.113883.5.1100</xsl:variable>
     <xsl:variable name="oidHL7ActCode">2.16.840.1.113883.5.4</xsl:variable>
+    <xsl:variable name="oidHL7ActClass">2.16.840.1.113883.5.6</xsl:variable>
     <xsl:variable name="oidHL7ActStatus">2.16.840.1.113883.5.14</xsl:variable>
     <xsl:variable name="oidHL7AddressUse">2.16.840.1.113883.5.1119</xsl:variable>
     <xsl:variable name="oidHL7AdministrativeGender">2.16.840.1.113883.5.1</xsl:variable>
@@ -67,7 +76,14 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     <xsl:variable name="oidNHGTabel15Verrichtingen">2.16.840.1.113883.2.4.4.30.15</xsl:variable>
     <xsl:variable name="oidNHGTabel25BCodesNumeriek">2.16.840.1.113883.2.4.4.5</xsl:variable>
     <xsl:variable name="oidNHGTabel45DiagnBepal">2.16.840.1.113883.2.4.4.30.45</xsl:variable>
+    <xsl:variable name="oidNHGTabel45DiagnBepalResultaat">2.16.840.1.113883.2.4.4.30.1045</xsl:variable>
     <xsl:variable name="oidNHGTabel56Profylaxe">2.16.840.1.113883.2.4.4.30.56</xsl:variable>
+    <xsl:variable name="oidQuestionnaireItemUIControlCodes">2.16.840.1.113883.4.642.1.849</xsl:variable>
+    <xsl:variable name="oidQuestionnaireItemType">2.16.840.1.113883.4.642.1.438</xsl:variable>
+    <xsl:variable name="oidQuestionnaireItemUsageMode">2.16.840.1.113883.4.642.1.855</xsl:variable>
+    <xsl:variable name="oidQuestionnaireResponseStatus">2.16.840.1.113883.4.642.1.441</xsl:variable>    
+    <xsl:variable name="oidQuestionnaireTextCategories">2.16.840.1.113883.4.642.1.853</xsl:variable>
+    <xsl:variable name="oidSNOMEDCT">2.16.840.1.113883.6.96</xsl:variable>
     <xsl:variable name="oidSBVZOrganization">2.16.528.1.1007</xsl:variable>
     <xsl:variable name="oidSBVZSystems">2.16.528.1.1007.4</xsl:variable>
     <xsl:variable name="oidUCUM">2.16.840.1.113883.6.8</xsl:variable>
@@ -75,34 +91,36 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     <xsl:variable name="oidUZIPersons">2.16.528.1.1007.3.1</xsl:variable>
     <xsl:variable name="oidUZISystems">2.16.528.1.1007.3.2</xsl:variable>
     <xsl:variable name="oidUZIRoleCode">2.16.840.1.113883.2.4.15.111</xsl:variable>
-    <xsl:variable name="oidSNOMEDCT">2.16.840.1.113883.6.96</xsl:variable>
-    
+    <xsl:variable name="oidZIBLaboratoriumUitslagTestUitslagStatus">2.16.840.1.113883.2.4.3.11.60.40.4.16.1</xsl:variable>
+ 
     <xsl:variable name="NHGZoNodigNumeriek">1137</xsl:variable>
 
     <xsl:variable name="hl7NullFlavorMap" as="element()+">
         <!-- bron: https://www.hl7.nl/wiki/index.php/Vocabulaire.NullFlavor -->
-        <map hl7NullFlavor="NI" displayName="geen informatie"/>
-        <map hl7NullFlavor="INV" displayName="ongeldig"/>
-        <map hl7NullFlavor="DER" displayName="afgeleid"/>
+        <map hl7NullFlavor="NI" displayName="geen informatie" displayNameEN="no information"/>
+        <map hl7NullFlavor="INV" displayName="ongeldig" displayNameEN="invalid"/>
+        <map hl7NullFlavor="DER" displayName="afgeleid" displayNameEN="derived"/>
         <!-- er staat 'anders' in de bron, maar 'overig' is een logischere vertaling van other bij valuesets... -->
-        <map hl7NullFlavor="OTH" displayName="overig"/>
-        <map hl7NullFlavor="NINF" displayName="negatief oneindig"/>
-        <map hl7NullFlavor="PINF" displayName="positief oneindig"/>
-        <map hl7NullFlavor="UNC" displayName="niet-gecodeerd"/>
-        <map hl7NullFlavor="MSK" displayName="gemaskeerd"/>
-        <map hl7NullFlavor="NA" displayName="niet van toepassing"/>
-        <map hl7NullFlavor="UNK" displayName="onbekend"/>
-        <map hl7NullFlavor="ASKU" displayName="gevraagd maar onbekend"/>
-        <map hl7NullFlavor="NAV" displayName="tijdelijk niet beschikbaar"/>
-        <map hl7NullFlavor="NASK" displayName="niet gevraagd"/>
+        <map hl7NullFlavor="OTH" displayName="overig" displayNameEN="other"/>
+        <map hl7NullFlavor="NINF" displayName="negatief oneindig" displayNameEN="negative infinity"/>
+        <map hl7NullFlavor="PINF" displayName="positief oneindig" displayNameEN="positive infinity"/>
+        <map hl7NullFlavor="UNC" displayName="niet-gecodeerd" displayNameEN="unencoded"/>
+        <map hl7NullFlavor="MSK" displayName="gemaskeerd" displayNameEN="masked"/>
+        <map hl7NullFlavor="NA" displayName="niet van toepassing" displayNameEN="not applicable"/>
+        <map hl7NullFlavor="UNK" displayName="onbekend" displayNameEN="unknown"/>
+        <map hl7NullFlavor="ASKU" displayName="gevraagd maar onbekend" displayNameEN="asked but unknown"/>
+        <map hl7NullFlavor="NAV" displayName="tijdelijk niet beschikbaar" displayNameEN="temporarily unavailable"/>
+        <map hl7NullFlavor="NASK" displayName="niet gevraagd" displayNameEN="not asked"/>
         <!-- QS wordt gebruikt bij magistrale bereidingen: ingrediënten voor geneesmiddelen, betekent dan eigenlijk 'aanvullen tot' -->
-        <map hl7NullFlavor="QS" displayName="voldoende hoeveelheid"/>
-        <map hl7NullFlavor="TRC" displayName="spoor"/>
+        <map hl7NullFlavor="QS" displayName="voldoende hoeveelheid" displayNameEN="quantity sufficient"/>
+        <map hl7NullFlavor="TRC" displayName="spoor" displayNameEN="trace"/>
     </xsl:variable>
 
     <xsl:variable name="oidMap" as="element()+">
         <map oid="{$oidAGB}" uri="http://fhir.nl/fhir/NamingSystem/agb-z" displayName="AGB-Z"/>
         <map oid="{$oidBurgerservicenummer}" uri="http://fhir.nl/fhir/NamingSystem/bsn" displayName="BSN"/>
+        <map oid="{$oidChoiceListOrientation}" uri="http://hl7.org/fhir/choice-list-orientation" displayName="ChoiceListOrientation"/>
+        <map oid="{$oidFHIRObservationCategory}" uri="http://hl7.org/fhir/observation-category" displayName="ObservationCategory"/>
         <map oid="{$oidGStandaardHPK}" displayName="G-Standaard HPK"/>
         <map oid="{$oidGStandaardPRK}" displayName="G-Standaard PRK"/>
         <map oid="{$oidGStandaardGPK}" displayName="G-Standaard GPK"/>
@@ -129,7 +147,13 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
         <map oid="{$oidNHGTabel15Verrichtingen}" uri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-15-verrichtingen" displayName="NHG Tabel 15 Verrichtingen"/>
         <map oid="{$oidNHGTabel25BCodesNumeriek}" uri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-25-gebruiksvoorschrift#aanvullend-numeriek" displayName="NHG Tabel 25 B Codes (numeriek)"/>
         <map oid="{$oidNHGTabel45DiagnBepal}" uri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-45-diagnostische-bepalingen" displayName="NHG Tabel 45 Diagnostische bepalingen"/>
+        <map oid="{$oidNHGTabel45DiagnBepalResultaat}" uri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-45-diagnostische-bepalingen#resultaten" displayName="NHG Labcodetabel 45 resultaten"/>
         <map oid="{$oidNHGTabel56Profylaxe}" uri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-56-profylaxe-en-voorzorg" displayName="NHG Tabel 56 Profylaxe en voorzorg"/>
+        <map oid="{$oidQuestionnaireItemUIControlCodes}" uri="http://hl7.org/fhir/questionnaire-item-control" displayName="Questionnaire Item UI Control Codes"/>
+        <map oid="{$oidQuestionnaireItemType}" uri="http://hl7.org/fhir/item-type" displayName="QuestionnaireItemType"/>
+        <map oid="{$oidQuestionnaireItemUsageMode}" uri="http://hl7.org/fhir/questionnaire-usage-mode" displayName="QuestionnaireItemUsageMode Item UI Control Codes"/>
+        <map oid="{$oidQuestionnaireResponseStatus}" uri="http://hl7.org/fhir/questionnaire-answers-status" displayName="QuestionnaireResponseStatus"/>
+        <map oid="{$oidQuestionnaireTextCategories}" uri="http://hl7.org/fhir/questionnaire-display-category" displayName="Questionnaire Text Categories"/>
         <map oid="{$oidSNOMEDCT}" uri="http://snomed.info/sct" displayName="SNOMED CT"/>
         <map oid="{$oidUCUM}" uri="http://unitsofmeasure.org" displayName="UCUM"/>
         <map oid="{$oidURAOrganizations}" uri="http://fhir.nl/fhir/NamingSystem/ura" displayName="URA"/>
