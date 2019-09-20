@@ -2080,7 +2080,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     </xsl:template>
 
     <xd:doc>
-        <xd:desc> &lt;xsl:include href="../zib1bbr/zib1bbr_include.xsl"/&gt; &lt;xsl:include href="../naw/naw_include.xsl"/&gt; </xd:desc>
+        <xd:desc>Creates an administration schedule.</xd:desc>
         <xd:param name="toedieningsschema"/>
     </xd:doc>
     <xsl:template name="zib-Administration-Schedule-2.0">
