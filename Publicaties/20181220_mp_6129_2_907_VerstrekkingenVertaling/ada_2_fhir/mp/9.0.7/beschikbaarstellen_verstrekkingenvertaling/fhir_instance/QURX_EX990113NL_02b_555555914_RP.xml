@@ -4,7 +4,7 @@
    <type value="searchset"/>
    <total value="22"/>
    <entry>
-      <fullUrl value="urn:uuid:bec0d643-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70e43-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -40,7 +40,7 @@
                <display value="NOVORAPID PENFILL INJVLST 100E/ML PATROON 3ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -80,7 +80,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0d672-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70e72-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -108,7 +108,7 @@
                <display value="ASPIRINE PROTECT EC TABLET MSR 100MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -141,7 +141,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0d9c4-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c706d4-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -169,7 +169,7 @@
                <display value="Cetomacrogolcreme met 10% vaseline fagron"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -203,7 +203,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0d9f2-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70702-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -239,7 +239,7 @@
                <display value="SPIRIVA INHALPDR 18 MCG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -271,7 +271,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0da24-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70734-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -315,7 +315,7 @@
                <display value="Marvelon tablet"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -347,7 +347,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0da52-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70762-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -375,7 +375,7 @@
                <display value="METFORMINE HCL CF TABLET 850MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -416,7 +416,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0da86-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c70796-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -452,7 +452,7 @@
                <display value="INSULATARD PENFILL INJ 100IE/ML PATR 3ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -484,7 +484,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0dab6-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c707c6-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -525,7 +525,7 @@
                <display value="FLUIMUCIL INHVLST 100MG/ML AMPUL 4ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -571,7 +571,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0daeb-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c707fb-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -605,7 +605,7 @@
                <display value="AFFUSINE CREME 20MG/G"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -617,9 +617,11 @@
             <dosageInstruction>
                <text value="Vanaf T, gedurende 2 weken, 3 gram per dag dun aanbrengen; Vanaf T + 14 dagen, gedurende 3 weken, 2 gram per dag dun aanbrengen ; Vanaf T + 35 dagen, gedurende 6 dagen,  1 gram per dag dun aanbrengen"/>
                <additionalInstruction>
-                  <extension url="http://hl7.org/fhir/StructureDefinition/iso21090-nullFlavor">
-                     <valueCode value="OTH"/>
-                  </extension>
+                  <coding>
+                     <system value="http://hl7.org/fhir/v3/NullFlavor"/>
+                     <code value="OTH"/>
+                     <display value="overig"/>
+                  </coding>
                   <text value="dun aanbrengen"/>
                </additionalInstruction>
             </dosageInstruction>
@@ -630,7 +632,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0db0f-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c7081f-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -666,7 +668,7 @@
                <display value="Ibuprofen PCH tablet 600mg"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -698,7 +700,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0db3e-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c7084e-f99b-11e9-4148-020000000000"/>
       <resource>
          <MedicationDispense>
             <meta>
@@ -734,7 +736,7 @@
                <display value="DICLOFENAC NATRIUM SANDOZ TABLET MSR 50MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -785,7 +787,7 @@
                <display value="NOVORAPID PENFILL INJVLST 100E/ML PATROON 3ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -844,7 +846,7 @@
                <display value="ASPIRINE PROTECT EC TABLET MSR 100MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -903,7 +905,7 @@
                <display value="Cetomacrogolcreme met 10% vaseline fagron"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -962,7 +964,7 @@
                <display value="SPIRIVA INHALPDR 18 MCG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1021,7 +1023,7 @@
                <display value="Marvelon tablet"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1086,7 +1088,7 @@
                <display value="METFORMINE HCL CF TABLET 850MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1151,7 +1153,7 @@
                <display value="INSULATARD PENFILL INJ 100IE/ML PATR 3ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1210,7 +1212,7 @@
                <display value="FLUIMUCIL INHVLST 100MG/ML AMPUL 4ML"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1269,7 +1271,7 @@
                <display value="AFFUSINE CREME 20MG/G"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1334,7 +1336,7 @@
                <display value="Ibuprofen PCH tablet 600mg"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1393,7 +1395,7 @@
                <display value="DICLOFENAC NATRIUM SANDOZ TABLET MSR 50MG"/>
             </medicationReference>
             <subject>
-               <reference value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+               <reference value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
                <display value="Aygül A. Direnç"/>
             </subject>
             <performer>
@@ -1420,7 +1422,7 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:bec0d1fe-dbb2-11e9-1513-020000000000"/>
+      <fullUrl value="urn:uuid:65c7072e-f99b-11e9-4148-020000000000"/>
       <resource>
          <Patient>
             <meta>
@@ -1428,7 +1430,11 @@
             </meta>
             <identifier>
                <system value="http://fhir.nl/fhir/NamingSystem/bsn"/>
-               <value value="555555914"/>
+               <value>
+                  <extension url="http://hl7.org/fhir/StructureDefinition/data-absent-reason">
+                     <valueCode value="masked"/>
+                  </extension>
+               </value>
             </identifier>
             <name>
                <extension url="http://hl7.org/fhir/StructureDefinition/humanname-assembly-order">
@@ -1489,6 +1495,7 @@
                   <display value="NOVORAPID PENFILL INJVLST 100E/ML PATROON 3ML"/>
                   <userSelected value="true"/>
                </coding>
+               <text value="NOVORAPID PENFILL INJVLST 100E/ML PATROON 3ML"/>
             </code>
          </Medication>
       </resource>
@@ -1518,6 +1525,7 @@
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
                   <code value="103039"/>
                </coding>
+               <text value="ASPIRINE PROTECT EC TABLET MSR 100MG"/>
             </code>
          </Medication>
       </resource>
@@ -1544,6 +1552,7 @@
                   <code value="133329"/>
                   <display value="Cetomacrogolcreme met vaseline 10%"/>
                </coding>
+               <text value="Cetomacrogolcreme met 10% vaseline fagron"/>
             </code>
          </Medication>
       </resource>
@@ -1573,6 +1582,7 @@
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
                   <code value="115371"/>
                </coding>
+               <text value="SPIRIVA INHALPDR 18 MCG"/>
             </code>
          </Medication>
       </resource>
@@ -1594,6 +1604,7 @@
                   <display value="Marvelon tablet"/>
                   <userSelected value="true"/>
                </coding>
+               <text value="Marvelon tablet"/>
             </code>
          </Medication>
       </resource>
@@ -1623,6 +1634,7 @@
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
                   <code value="15865"/>
                </coding>
+               <text value="METFORMINE HCL CF TABLET 850MG"/>
             </code>
          </Medication>
       </resource>
@@ -1652,6 +1664,7 @@
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
                   <code value="111325"/>
                </coding>
+               <text value="INSULATARD PENFILL INJ 100IE/ML PATR 3ML"/>
             </code>
          </Medication>
       </resource>
@@ -1681,6 +1694,7 @@
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
                   <code value="38539"/>
                </coding>
+               <text value="FLUIMUCIL INHVLST 100MG/ML AMPUL 4ML"/>
             </code>
          </Medication>
       </resource>
@@ -1702,6 +1716,7 @@
                   <display value="AFFUSINE CREME 20MG/G"/>
                   <userSelected value="true"/>
                </coding>
+               <text value="AFFUSINE CREME 20MG/G"/>
             </code>
          </Medication>
       </resource>
@@ -1723,6 +1738,7 @@
                   <display value="Ibuprofen PCH tablet 600mg"/>
                   <userSelected value="true"/>
                </coding>
+               <text value="Ibuprofen PCH tablet 600mg"/>
             </code>
          </Medication>
       </resource>
@@ -1744,6 +1760,7 @@
                   <display value="DICLOFENAC NATRIUM SANDOZ TABLET MSR 50MG"/>
                   <userSelected value="true"/>
                </coding>
+               <text value="DICLOFENAC NATRIUM SANDOZ TABLET MSR 50MG"/>
             </code>
          </Medication>
       </resource>
