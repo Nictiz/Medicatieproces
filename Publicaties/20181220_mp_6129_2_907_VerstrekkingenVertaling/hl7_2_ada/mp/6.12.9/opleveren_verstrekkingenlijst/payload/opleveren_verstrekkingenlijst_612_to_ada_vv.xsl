@@ -30,12 +30,18 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     </xd:doc>
     <xsl:template match="/">
         <xsl:variable name="verstrekkingslijst-612" select="//hl7:QURX_IN990113NL/hl7:ControlActProcess/hl7:subject/hl7:MedicationDispenseList"/>
-        <xsl:if test="$verstrekkingslijst-612">
-            <!-- alleen conversie naar 9 medicatiegegevens als er ook een verstrekkingenlijst is -->
-            <xsl:call-template name="Verstrekking_612">
-                <xsl:with-param name="dispense-lists" select="$verstrekkingslijst-612"/>
-             </xsl:call-template>
-        </xsl:if>
+        <xsl:choose>
+            <!-- alleen inhoudelijke conversie als er ook een verstrekkingenlijst is -->
+            <xsl:when test="$verstrekkingslijst-612">
+                <xsl:call-template name="Verstrekking_612">
+                    <xsl:with-param name="dispense-lists" select="$verstrekkingslijst-612"/>
+                </xsl:call-template>
+             </xsl:when>
+        <!-- anders alleen root element om valide xml in output te hebben -->
+            <xsl:otherwise>
+                <beschikbaarstellen_verstrekkingenvertaling app="mp-mp907" shortName="{$transaction-name}" formName="{$ada-formname}" transactionRef="{$transaction-oid}" transactionEffectiveDate="{$transaction-effectiveDate}" prefix="mp-" language="nl-NL"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xd:doc>
         <xd:desc>Converteert een verstrekkingenlijst</xd:desc>
