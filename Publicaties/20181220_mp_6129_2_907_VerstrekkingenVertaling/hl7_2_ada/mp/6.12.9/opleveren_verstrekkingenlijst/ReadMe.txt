@@ -1,4 +1,4 @@
-This is a preliminary version of converting Beschikbaarstellen verstrekkingenlijst 6.12.8 payload to a relatively simple dataset xml format (based on functional definition of a MP 9 beschikbaarstellen medicatiegegevens transaction). It is based on the publication with timestamp 26-04-2018 14:09 (http://decor.nictiz.nl/medicatieproces/mp-html-20180426T140905/project.html).
+This is a preliminary version of converting Beschikbaarstellen verstrekkingenlijst 6.12.9 payload to a relatively simple dataset xml format (based on functional definition of a MP 9 beschikbaarstellen medicatiegegevens transaction). It is based on the publication with timestamp 26-04-2018 14:09 (http://decor.nictiz.nl/medicatieproces/mp-html-20180426T140905/project.html).
 
 Even though it does contain some functionality for wrappers, it only properly converts the payload, since all dataset elements end up in the payload. So in the HL7 message the xml element (including all of it's contents): 
 //ControlActProcess/subject
@@ -18,3 +18,5 @@ The folder 'hl7_instance' contains sample hl7 instance files. They are in no way
 
 The ADA user front-end (where ada instances can be created using a GUI) for mp-mp9 can be found here: 
 https://decor.nictiz.nl/art-decor/ada-data/projects/mp-mp9/views/medicatieproces_9_index.xhtml
+
+This version has been tested with Saxon 9.9.1.7.
