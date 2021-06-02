@@ -137,7 +137,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         <dosering conceptId="{$xsd-dosering/xs:attribute[@name='conceptId']/@fixed}">
                             <!-- keerdosis -->
                             <xsl:call-template name="mp9-keerdosis">
-                                <xsl:with-param name="hl7-doseQuantity" select="$current-hl7-mar/doseQuantity"/>
+                                <xsl:with-param name="hl7-doseQuantity" select="$current-hl7-mar/hl7:doseQuantity"/>
                                 <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
                                 <xsl:with-param name="xsd-dosering" select="$xsd-dosering"/>
                             </xsl:call-template>
