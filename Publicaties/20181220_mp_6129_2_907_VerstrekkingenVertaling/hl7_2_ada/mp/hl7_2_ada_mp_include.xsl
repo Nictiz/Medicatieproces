@@ -402,16 +402,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
             <xsl:otherwise>
                 <xsl:comment>Unexpected amount of medicationAdministrationRequests, expected 2 but received: <xsl:value-of select="count($hl7-mar)"/></xsl:comment>
             </xsl:otherwise>
-        </xsl:choose>
-        <!-- <xsl:for-each select="$hl7-mar">
-            <xsl:variable name="hl7-pivl" select=".//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
-            <xsl:call-template name="mp9-doseerinstructie-from-mp612-freq">
-                <xsl:with-param name="current-hl7-mar" select="."/>
-                <xsl:with-param name="hl7-pivl" select="$hl7-pivl"/>
-                <xsl:with-param name="xsd-gebruiksinstructie" select="$xsd-gebruiksinstructie"/>
-                <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
-            </xsl:call-template>
-        </xsl:for-each>-->
+        </xsl:choose>      
     </xsl:template>
     <xd:doc>
         <xd:desc/>
@@ -540,8 +531,8 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
             <!-- ondersteun alleen de meest voorkomende schema's, zie 
          https://informatiestandaarden.nictiz.nl/wiki/7phcy:V6.12.7_HL7v3-domeinspecificatie_Pharmacy#medicationAdministrationRequest.effectiveTime -->
             <!-- DUS NIET: op- en afbouwschema's, dat moeten geankerde intervallen zijn in meerdere mar's - (nog) niet ondersteund -->
-            <xsl:variable name="hl7-pivl" select="$mar-sorted//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
-            <xsl:variable name="hl7-ivl" select="$mar-sorted//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+            <xsl:variable name="hl7-pivl" select="$mar-sorted//*[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'PIVL_TS']"/>
+            <xsl:variable name="hl7-ivl" select="$mar-sorted//*[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']"/>
             <xsl:variable name="parallel" as="xs:boolean">
                 <!-- are all encountered mar's parallel, i.e. no opbouw/afbouw schedule -->
                 <xsl:choose>
@@ -558,7 +549,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
             </xsl:variable>
             <xsl:choose>
                 <!-- eenmalig gebruik, in 1 mar met 1 eenmalige effectiveTime -->
-                <xsl:when test="count($effectiveTimes-eenmalig) = 1 and count($mar-sorted) = 1">
+                <xsl:when test="count($effectiveTimes-eenmalig[@value]) = 1 and count($mar-sorted) = 1">
                     <xsl:call-template name="mp9-doseerinstructie-from-mp612-eenmalig">
                         <xsl:with-param name="current-hl7-mar" select="$mar-sorted"/>
                         <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
@@ -591,7 +582,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         <xsl:otherwise>
                             <xsl:comment>variabele frequentie in effectiveTime of comp, 2 mars, 1 vast, 1 zo nodig, parallel, verschillende keerdosis</xsl:comment>
                             <xsl:for-each select="$mar-sorted">
-                                <xsl:variable name="hl7-pivl" select=".//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+                                <xsl:variable name="hl7-pivl" select=".//*[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'PIVL_TS']"/>
                                 <xsl:call-template name="mp9-doseerinstructie-from-mp612-freq">
                                     <xsl:with-param name="current-hl7-mar" select="."/>
                                     <xsl:with-param name="hl7-pivl" select="$hl7-pivl"/>
@@ -606,7 +597,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                 <xsl:when test="count($mar-sorted) = 2 and (count($mar-sorted[hl7:precondition]) gt 0 or $mar-sorted[hl7:precondition/hl7:observationEventCriterion/hl7:code[not(@code = $NHGZoNodigNumeriek and @codeSystem = $oidNHGTabel25BCodesNumeriek)]]) and $parallel">
                     <xsl:comment>variabele frequentie in effectiveTime of comp, 2 mars, minimaal een precondition (indien 1 is die anders dan de 1137, want anders eerder gematcht), parallel</xsl:comment>
                     <xsl:for-each select="$mar-sorted">
-                        <xsl:variable name="hl7-pivl" select=".//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+                        <xsl:variable name="hl7-pivl" select=".//*[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'PIVL_TS']"/>
                         <xsl:call-template name="mp9-doseerinstructie-from-mp612-freq">
                             <xsl:with-param name="current-hl7-mar" select="."/>
                             <xsl:with-param name="hl7-pivl" select="$hl7-pivl"/>
@@ -701,7 +692,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                 <xsl:variable name="hl7-doseerinstructie" select="./hl7:entryRelationship[hl7:substanceAdministration/hl7:templateId/@root = '2.16.840.1.113883.2.4.3.11.60.20.77.10.9149']"/>
                 <!-- herhaalperiode_cyclisch_schema -->
                 <!-- er mag er maar eentje zijn -->
-                <xsl:for-each select="$hl7-doseerinstructie/hl7:substanceAdministration/hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:comp[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3') and not(@alignment)][hl7nl:phase[hl7nl:width]]/hl7nl:period">
+                <xsl:for-each select="$hl7-doseerinstructie/hl7:substanceAdministration/hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')]/hl7:comp[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:phase[hl7nl:width]]/hl7nl:period">
                     <herhaalperiode_cyclisch_schema value="{./@value}" unit="{./@unit}">
                         <xsl:copy-of select="nf:getADAComplexTypeConceptId(nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-gebruiksinstructie, 'herhaalperiode_cyclisch_schema')))"/>
                     </herhaalperiode_cyclisch_schema>
@@ -720,8 +711,8 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         <!-- doseerduur -->
                         <xsl:choose>
                             <!-- doseerduur in Cyclisch doseerschema. -->
-                            <xsl:when test="./hl7:substanceAdministration/hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][hl7:comp[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3') and not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp/hl7nl:phase/hl7nl:width">
-                                <xsl:for-each select="./hl7:substanceAdministration/hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][hl7:comp[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3') and not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp/hl7nl:phase/hl7nl:width">
+                            <xsl:when test="./hl7:substanceAdministration/hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')][hl7:comp[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp/hl7nl:phase/hl7nl:width">
+                                <xsl:for-each select="./hl7:substanceAdministration/hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')][hl7:comp[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp/hl7nl:phase/hl7nl:width">
                                     <doseerduur value="{./@value}" unit="{nf:convertTime_UCUM2ADA_unit(./@unit)}">
                                         <xsl:copy-of select="nf:getADAComplexTypeConceptId(nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-doseerinstructie, 'doseerduur')))"/>
                                     </doseerduur>
@@ -729,7 +720,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                             </xsl:when>
                             <!-- overige gevallen -->
                             <xsl:otherwise>
-                                <xsl:for-each select="./hl7:substanceAdministration/hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:width">
+                                <xsl:for-each select="./hl7:substanceAdministration/hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]/hl7:width">
                                     <doseerduur value="{./@value}" unit="{nf:convertTime_UCUM2ADA_unit(./@unit)}">
                                         <xsl:copy-of select="nf:getADAComplexTypeConceptId(nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-doseerinstructie, 'doseerduur')))"/>
                                     </doseerduur>
@@ -777,19 +768,19 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                 </xsl:for-each>
                                 <!-- toedieningsschema -->
                                 <!-- er moet een PIVL_TS zijn om een toedieningsschema te maken -->
-                                <xsl:if test=".//*[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')]">
+                                <xsl:if test=".//*[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')]">
                                     <xsl:variable name="xsd-toedieningsschema" select="nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-dosering, 'toedieningsschema'))"/>
                                     <toedieningsschema>
                                         <xsl:copy-of select="nf:getADAComplexTypeConceptId($xsd-toedieningsschema)"/>
                                         <!-- eenvoudig doseerschema met alleen één frequentie -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][@isFlexible = 'true'][not(@alignment)][hl7nl:frequency][not(hl7nl:phase)]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][@isFlexible = 'true'][not(@alignment)][hl7nl:frequency][not(hl7nl:phase)]">
                                             <xsl:call-template name="template_2.16.840.1.113883.2.4.3.11.60.20.77.10.9162_20161110120339">
                                                 <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
                                                 <xsl:with-param name="xsd-toedieningsschema" select="$xsd-toedieningsschema"/>
                                             </xsl:call-template>
                                         </xsl:for-each>
                                         <!-- X tot Y maal per T -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][not(@alignment)][hl7nl:frequency/hl7nl:numerator/hl7nl:uncertainRange]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:frequency/hl7nl:numerator/hl7nl:uncertainRange]">
                                             <xsl:variable name="xsd-frequentie" select="nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-toedieningsschema, 'frequentie'))"/>
                                             <frequentie conceptId="{$xsd-frequentie/xs:attribute[@name='conceptId']/@fixed}">
                                                 <xsl:variable name="xsd-aantal" select="nf:getADAComplexType($xsd-ada, nf:getADAComplexTypeName($xsd-frequentie, 'aantal'))"/>
@@ -824,18 +815,18 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                             </frequentie>
                                         </xsl:for-each>
                                         <!-- Eenvoudig doseerschema met alleen één interval.-->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][(@isFlexible = 'false' or not(@isFlexible))][not(@alignment)][hl7nl:frequency[hl7nl:numerator/@value]]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][(@isFlexible = 'false' or not(@isFlexible))][not(@alignment)][hl7nl:frequency[hl7nl:numerator/@value]]">
                                             <xsl:variable name="xsd-complexType" select="$xsd-toedieningsschema//xs:element[@name = 'interval']/@type"/>
                                             <xsl:variable name="interval-value" select="format-number(number(./hl7nl:frequency/hl7nl:denominator/@value) div number(./hl7nl:frequency/hl7nl:numerator/@value), '0.####')"/>
                                             <interval value="{$interval-value}" unit="{nf:convertTime_UCUM2ADA_unit(./hl7nl:frequency/hl7nl:denominator/@unit)}" conceptId="{$xsd-ada//xs:complexType[@name = $xsd-complexType]/xs:attribute[@name='conceptId']/@fixed}"/>
                                         </xsl:for-each>
                                         <!-- Eenvoudig doseerschema met één vast tijdstip. -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][not(@alignment)][hl7nl:phase[not(hl7nl:width)]]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:phase[not(hl7nl:width)]]">
                                             <xsl:variable name="xsd-complexType" select="$xsd-toedieningsschema//xs:element[@name = 'toedientijd']/@type"/>
                                             <toedientijd value="{nf:formatHL72XMLDate(nf:appendDate2DateOrTime(./hl7nl:phase/hl7nl:low/@value), nf:determine_date_precision(./hl7nl:phase/hl7nl:low/@value))}" conceptId="{$xsd-ada//xs:complexType[@name = $xsd-complexType]/xs:attribute[@name='conceptId']/@fixed}"/>
                                         </xsl:for-each>
                                         <!-- Doseerschema met toedieningsduur. -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][not(@alignment)][not(hl7nl:period)][hl7nl:phase[hl7nl:width]]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][not(hl7nl:period)][hl7nl:phase[hl7nl:width]]">
                                             <xsl:call-template name="template_2.16.840.1.113883.2.4.3.11.60.20.77.10.9162_20161110120339">
                                                 <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
                                                 <xsl:with-param name="xsd-toedieningsschema" select="$xsd-toedieningsschema"/>
@@ -851,14 +842,14 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                             <toedientijd value="{nf:formatHL72XMLDate(nf:appendDate2DateOrTime(./hl7nl:phase/hl7nl:low/@value), nf:determine_date_precision(./hl7nl:phase/hl7nl:low/@value))}" conceptId="{$xsd-ada//xs:complexType[@name = $xsd-complexType]/xs:attribute[@name='conceptId']/@fixed}"/>
                                         </xsl:for-each>
                                         <!-- Cyclisch doseerschema. -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][hl7:comp[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3') and not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp[hl7nl:frequency]">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')][hl7:comp[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:period][hl7nl:phase[hl7nl:width]]]/hl7:comp[hl7nl:frequency]">
                                             <xsl:call-template name="template_2.16.840.1.113883.2.4.3.11.60.20.77.10.9162_20161110120339">
                                                 <xsl:with-param name="xsd-ada" select="$xsd-ada"/>
                                                 <xsl:with-param name="xsd-toedieningsschema" select="$xsd-toedieningsschema"/>
                                             </xsl:call-template>
                                         </xsl:for-each>
                                         <!-- Eenmalig gebruik of aantal keren gebruik zonder tijd. -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][not(@alignment)][hl7nl:count]/hl7nl:count">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][hl7nl:count]/hl7nl:count">
                                             <xsl:variable name="xsd-frequentie-complexType" select="$xsd-toedieningsschema//xs:element[@name = 'frequentie']/@type"/>
                                             <xsl:variable name="xsd-frequentie" select="$xsd-ada//xs:complexType[@name = $xsd-frequentie-complexType]"/>
                                             <frequentie conceptId="{$xsd-frequentie/xs:attribute[@name='conceptId']/@fixed}">
@@ -894,7 +885,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                             </xsl:call-template>
                                         </xsl:for-each>
                                         <!-- Complexer doseerschema met weekdag(en). -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][hl7:comp/@alignment = 'DW']">
+                                        <xsl:for-each select="hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')][hl7:comp/@alignment = 'DW']">
                                             <xsl:comment>Complexer doseerschema met weekdag(en).</xsl:comment>
                                             <!-- de frequentie van inname op de weekdag, bijvoorbeeld: 3x per dag iedere woensdag. 3x per dag is dan de frequentie hier -->
                                             <xsl:for-each select="./hl7:comp[@isFlexible = 'true' and hl7nl:frequency]">
@@ -1023,7 +1014,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                             </xsl:call-template>
                                         </xsl:for-each>
                                         <!-- Complexer doseerschema met meer dan één dagdeel. -->
-                                        <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'SXPR_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][hl7:comp/@alignment = 'HD']/hl7:comp">
+                                        <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'SXPR_TS')][hl7:comp/@alignment = 'HD']/hl7:comp">
                                             <xsl:call-template name="mp9-weekdag">
                                                 <!-- FIXME: should this not be hl7nl:phase/hl7nl:low instead of .? -->
                                                 <xsl:with-param name="hl7-phase-low" select="hl7nl:phase/hl7nl:low"/>
@@ -1120,7 +1111,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                                     </xsl:choose>
                                 </xsl:for-each>
                                 <!-- Doseerschema met toedieningsduur. -->
-                                <xsl:for-each select="./hl7:effectiveTime[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'PIVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-nl:v3')][not(@alignment)][not(hl7nl:period)]/hl7nl:phase/hl7nl:width">
+                                <xsl:for-each select="./hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'PIVL_TS')][not(@alignment)][not(hl7nl:period)]/hl7nl:phase/hl7nl:width">
                                     <xsl:variable name="xsd-complexType" select="$xsd-dosering//xs:element[@name = 'toedieningsduur']/@type"/>
                                     <toedieningsduur value="{./@value}" unit="{nf:convertTime_UCUM2ADA_unit(./@unit)}" conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.23282"/>
                                 </xsl:for-each>
@@ -1463,22 +1454,22 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
         <!-- mar = medicationAdministrationRequest  -->
         <xsl:variable name="mar-sorted" as="element(hl7:medicationAdministrationRequest)*">
             <xsl:for-each select="$current-dispense-event/hl7:product/hl7:dispensedMedication/hl7:therapeuticAgentOf/hl7:medicationAdministrationRequest">
-                <xsl:sort data-type="number" select="nf:appendDate2DateTime((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:low/@value)"/>
+                <xsl:sort data-type="number" select="nf:appendDate2DateTime((.//hl7:effectiveTime | .//hl7:comp)[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]/hl7:low/@value)"/>
                 <!-- tested this with xsl:sequence, but the later use of for-each to iterate through the variable $mar does not respect the sorted order, 
                   but takes the input order from the input xml -->
                 <!-- the xslt2 perform-sort function has the same result (probably for same reason, since it uses sequence as well) -->
-                <!-- so we are useing copy-of here to preserve order, even though it is known to perform worse -->
+                <!-- so we are using copy-of here to preserve order, even though it is known to perform worse -->
                 <xsl:copy-of select="."/>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="IVL_TS" select="$mar-sorted//(hl7:effectiveTime | hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+        <xsl:variable name="IVL_TS" select="$current-dispense-event/hl7:product/hl7:dispensedMedication/hl7:therapeuticAgentOf/hl7:medicationAdministrationRequest//(hl7:effectiveTime | hl7:comp)[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]"/>
 
         <!-- toedieningsafspraak -->
         <xsl:for-each select="$current-dispense-event">
             <toedieningsafspraak conceptId="{$xsd-toedieningsafspraak/xs:attribute[@name='conceptId']/@fixed}">
                 <!-- gebruiksperiode-start -->
                 <!-- in 6.12 kun je alleen een conclusie trekken over gebruiksperiode-start, als álle MARs een IVL_TS/low/@value hebben -->
-                <xsl:if test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:low/@value)])">
+                <xsl:if test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/hl7:low/@value)])">
                     <!-- er kunnen er meer dan 1 zijn in 6.12 - neem de laagste low als gebruiksperiode startdatum -->
                     <!-- omdat $mar gesorteerd is, is dat de eerste $IVL_TS -->
                     <xsl:call-template name="mp9-gebruiksperiode-start">
@@ -1488,7 +1479,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                     </xsl:call-template>
                 </xsl:if>
                 <!-- gebruiksperiode-start bij eenmalig gebruik-->
-                <xsl:variable name="effectiveTimes-eenmalig" select="$mar-sorted/hl7:effectiveTime[not(@xsi:type) or (local-name-from-QName(resolve-QName(@xsi:type, .)) = 'TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+                <xsl:variable name="effectiveTimes-eenmalig" select="$mar-sorted/hl7:effectiveTime[not(@xsi:type) or resolve-QName(xs:string(@xsi:type), .) = (QName('', 'TS'), QName('urn:hl7-org:v3', 'TS'))]"/>
                 <xsl:choose>
                     <xsl:when test="count($effectiveTimes-eenmalig[not(@nullFlavor)]) = 1">
                         <xsl:comment>gebruiksperiode-start bij eenmalig gebruik</xsl:comment>
@@ -1519,7 +1510,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                 <!--  zonder width is de gebruiksperiode tot nader order en wordt deze niet opgenomen-->
                 <xsl:choose>
                     <!-- alle MARs IVL_TS/high/@value-->
-                    <xsl:when test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:high/@value)])">
+                    <xsl:when test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/hl7:high/@value)])">
                         <!-- er kunnen er meer dan 1 zijn in 6.12 - neem de hoogste high als gebruiksperiode einddatum -->
                         <xsl:variable name="eind-datums" as="element()*">
                             <xsl:for-each select="$IVL_TS/hl7:high[@value]">
@@ -1534,7 +1525,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         </xsl:call-template>
                     </xsl:when>
                     <!-- alle MAR's een low én een width bij meer dan 1 MAR -->
-                    <xsl:when test="$current-dispense-event[count(.//hl7:medicationAdministrationRequest) gt 1] and not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/(hl7:low/@value and hl7:width[@unit = 'd']/@value))])">
+                    <xsl:when test="$current-dispense-event[count(.//hl7:medicationAdministrationRequest) gt 1] and not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/(hl7:low/@value and hl7:width[@unit = 'd']/@value))])">
                         <!-- alle mar's hebben een low en een width. einddatums uitrekenen -->
                         <xsl:variable name="einddatums" as="element()*">
                             <xsl:for-each select="$IVL_TS">
@@ -1642,8 +1633,8 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
     </xsl:template>
 
     <xd:doc>
-        <xd:desc/>
-        <xd:param name="current-dispense-event"/>
+        <xd:desc>Handle an hl7 dispenseEvent and create an ada toedieningsafspraak element.</xd:desc>
+        <xd:param name="current-dispense-event">The input hl7 dispenseEvent, defaults to context.</xd:param>
         <xd:param name="xsd-ada"/>
         <xd:param name="xsd-mbh"/>
         <xd:param name="transaction">Which transaction is the context of this translation. Currently known: beschikbaarstellen_medicatiegegevens or beschikbaarstellen_verstrekkingenvertaling </xd:param>
@@ -1659,22 +1650,25 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
         <!-- mar = medicationAdministrationRequest  -->
         <xsl:variable name="mar-sorted" as="element(hl7:medicationAdministrationRequest)*">
             <xsl:for-each select="$current-dispense-event/hl7:product/hl7:dispensedMedication/hl7:therapeuticAgentOf/hl7:medicationAdministrationRequest">
-                <xsl:sort data-type="number" select="nf:appendDate2DateTime((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:low/@value)"/>
+                <xsl:sort data-type="number" select="nf:appendDate2DateTime((.//hl7:effectiveTime | .//hl7:comp)[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]/hl7:low/@value)"/>
                 <!-- tested this with xsl:sequence, but the later use of for-each to iterate through the variable $mar does not respect the sorted order, 
                   but takes the input order from the input xml -->
                 <!-- the xslt2 perform-sort function has the same result (probably for same reason, since it uses sequence as well) -->
-                <!-- so we are useing copy-of here to preserve order, even though it is known to perform worse -->
-                <xsl:copy-of select="."/>
+                <!-- so we are using copy-of here to preserve order, even though it is known to perform worse -->
+                <xsl:copy-of select="." />
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="IVL_TS" select="$mar-sorted//(hl7:effectiveTime | hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]"/>
+
+        <!--issue MP-371 cannot use $mar-sorted because copy-of causes namespace-uri-from-QName to fail -->
+        <!-- variable that contains all IVL_TS in all of the medicationAdministrationRequest's -->        
+        <xsl:variable name="IVL_TS" select="$current-dispense-event/hl7:product/hl7:dispensedMedication/hl7:therapeuticAgentOf/hl7:medicationAdministrationRequest//(hl7:effectiveTime | hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']" as="element()*"/>
 
         <!-- toedieningsafspraak -->
         <xsl:for-each select="$current-dispense-event">
             <toedieningsafspraak conceptId="{$xsd-toedieningsafspraak/xs:attribute[@name='conceptId']/@fixed}">
                 <!-- gebruiksperiode-start -->
                 <!-- in 6.12 kun je alleen een conclusie trekken over gebruiksperiode-start, als álle MARs een IVL_TS/low/@value hebben -->
-                <xsl:if test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:low/@value)])">
+                <xsl:if test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/hl7:low/@value)])">
                     <!-- er kunnen er meer dan 1 zijn in 6.12 - neem de laagste low als gebruiksperiode startdatum -->
                     <!-- omdat $mar gesorteerd is, is dat de eerste $IVL_TS -->
                     <xsl:call-template name="mp9-gebruiksperiode-start">
@@ -1684,7 +1678,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                     </xsl:call-template>
                 </xsl:if>
                 <!-- gebruiksperiode-start bij eenmalig gebruik-->
-                <xsl:variable name="effectiveTimes-eenmalig" select="$mar-sorted/hl7:effectiveTime[not(@xsi:type) or (local-name-from-QName(resolve-QName(@xsi:type, .)) = 'TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')][not(@nullFlavor)]"/>
+                <xsl:variable name="effectiveTimes-eenmalig" select="$mar-sorted/hl7:effectiveTime[not(@xsi:type) or resolve-QName(xs:string(@xsi:type), .) = (QName('', 'TS'), QName('urn:hl7-org:v3', 'TS'))]"/>
                 <xsl:choose>
                     <xsl:when test="count($effectiveTimes-eenmalig[not(@nullFlavor)]) = 1">
                         <xsl:comment>gebruiksperiode-start bij eenmalig gebruik</xsl:comment>
@@ -1715,7 +1709,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                 <!--  zonder width is de gebruiksperiode tot nader order en wordt deze niet opgenomen-->
                 <xsl:choose>
                     <!-- alle MARs IVL_TS/high/@value-->
-                    <xsl:when test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/hl7:high/@value)])">
+                    <xsl:when test="not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/hl7:high/@value)])">
                         <!-- er kunnen er meer dan 1 zijn in 6.12 - neem de hoogste high als gebruiksperiode einddatum -->
                         <xsl:variable name="eind-datums" as="element()*">
                             <xsl:for-each select="$IVL_TS/hl7:high[@value]">
@@ -1730,7 +1724,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         </xsl:call-template>
                     </xsl:when>
                     <!-- alle MAR's een low én een width bij meer dan 1 MAR -->
-                    <xsl:when test="$current-dispense-event[count(.//hl7:medicationAdministrationRequest) gt 1] and not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[(local-name-from-QName(resolve-QName(@xsi:type, .)) = 'IVL_TS' and namespace-uri-from-QName(resolve-QName(@xsi:type, .)) = 'urn:hl7-org:v3')]/(hl7:low/@value and hl7:width[@unit = 'd']/@value))])">
+                    <xsl:when test="$current-dispense-event[count(.//hl7:medicationAdministrationRequest) gt 1] and not($mar-sorted[not((.//hl7:effectiveTime | .//hl7:comp)[replace(xs:string(@xsi:type), '(.*:)?(.+)', '$2') = 'IVL_TS']/(hl7:low/@value and hl7:width[@unit = 'd']/@value))])">
                         <!-- alle mar's hebben een low en een width. einddatums uitrekenen -->
                         <xsl:variable name="einddatums" as="element()*">
                             <xsl:for-each select="$IVL_TS">
@@ -3060,7 +3054,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
         <xsl:variable name="xsd-ma" select="$xsd-ada//xs:complexType[@name = $ma-complexType]"/>
         <xsl:for-each select="$ma_hl7_90">
             <medicatieafspraak conceptId="{$xsd-ma/xs:attribute[@name='conceptId']/@fixed}">
-                <xsl:variable name="IVL_TS" select="./hl7:effectiveTime[@xsi:type = 'IVL_TS']"/>
+                <xsl:variable name="IVL_TS" select="hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]"/>
                 <xsl:for-each select="$IVL_TS/hl7:low[@value]">
                     <xsl:call-template name="mp9-gebruiksperiode-start">
                         <xsl:with-param name="inputValue" select="./@value"/>
@@ -3075,19 +3069,19 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
                         <xsl:with-param name="xsd-comp" select="$xsd-ma"/>
                     </xsl:call-template>
                 </xsl:for-each>
-                <xsl:for-each select="./hl7:id">
+                <xsl:for-each select="hl7:id">
                     <identificatie value="{./@extension}" root="{./@root}" conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.19758"/>
                 </xsl:for-each>
-                <xsl:for-each select="./hl7:author/hl7:time">
+                <xsl:for-each select="hl7:author/hl7:time">
                     <afspraakdatum value="{nf:formatHL72XMLDate(nf:appendDate2DateOrTime(./@value), nf:determine_date_precision(./@value))}" conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.19757"/>
                 </xsl:for-each>
                 <xsl:for-each select="$IVL_TS/hl7:width">
                     <gebruiksperiode value="{./@value}" unit="{nf:convertTime_UCUM2ADA_unit(./@unit)}" conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.19936"/>
                 </xsl:for-each>
-                <xsl:for-each select="./hl7:statusCode">
+                <xsl:for-each select="hl7:statusCode">
                     <geannuleerd_indicator value="{./@code='nullified'}" conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.23033"/>
                 </xsl:for-each>
-                <xsl:for-each select="./hl7:entryRelationship/*[hl7:templateId/@root = '2.16.840.1.113883.2.4.3.11.60.20.77.10.9067']/hl7:value">
+                <xsl:for-each select="hl7:entryRelationship/*[hl7:templateId/@root = '2.16.840.1.113883.2.4.3.11.60.20.77.10.9067']/hl7:value">
                     <stoptype conceptId="2.16.840.1.113883.2.4.3.11.60.20.77.2.3.19954">
                         <xsl:call-template name="mp9-code-attribs">
                             <xsl:with-param name="current-hl7-code" select="."/>
@@ -3207,7 +3201,7 @@ The full text of the license is available at http://www.gnu.org/copyleft/lesser.
             <medicatieafspraak>
                 <xsl:copy-of select="nf:getADAComplexTypeConceptId($xsd-ma)"/>
 
-                <xsl:variable name="IVL_TS" select="./hl7:effectiveTime[@xsi:type = 'IVL_TS']"/>
+                <xsl:variable name="IVL_TS" select="hl7:effectiveTime[resolve-QName(xs:string(@xsi:type), .) = QName('urn:hl7-org:v3', 'IVL_TS')]"/>
                 <!-- gebruiksperiode_start -->
                 <xsl:variable name="ada-elemName">gebruiksperiode_start</xsl:variable>
                 <xsl:call-template name="handleTS">
